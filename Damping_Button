@@ -1,0 +1,14 @@
+extension UIView {
+    
+    public func damping(){
+        UIView.animate(withDuration: 0.12, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.5, options: .curveEaseIn) {
+            
+            self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        } completion: { _ in
+            UIView.animate(withDuration: 0.12, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.5, options: .curveEaseIn) {
+                self.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+        }
+
+    }
+}
