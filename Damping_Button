@@ -1,5 +1,5 @@
 extension UIView {
-    
+
     public func damping(){
         UIView.animate(withDuration: 0.12, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.5, options: .curveEaseIn) {
             
@@ -10,5 +10,19 @@ extension UIView {
             }
         }
 
+    }
+}
+
+
+class A : UIViewController {
+    @objc func handle_sliding() {
+        UIView.animate(withDuration: 0.12) {
+            button.center.x += 10
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.12) {
+            UIView.animate(withDuration: 0.12) {
+                button.center.x -= 10
+            }
+        }
     }
 }
