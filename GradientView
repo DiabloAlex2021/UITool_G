@@ -1,0 +1,64 @@
+import UIKit
+// Example of how to use it in a UIViewController
+class YourViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        gradient_View(n: 200, c1: colors[1], c2: colors[2])
+        
+    }
+    
+    let container : UIView = {
+       let iv = UIView()
+        iv.clipsToBounds = true
+        iv.frame = CGRect(x: 30, y: 60, width: 100, height: 100)
+        iv.layer.cornerRadius = 100/2
+        return iv
+    }()
+    
+    let colors = ["R","G","B"]
+    let colors_val = [UIColor.red,UIColor.green,UIColor.blue]
+    func gradient_View (n : Int, c1 : String, c2 : String) {
+        view.addSubview(container)
+        var p0 : UIColor?
+        var p1 : UIColor?
+        for i in 0..<colors.count {
+            if c1 == colors[i] {
+                p0 = colors_val[i]
+            }
+            if c2 == colors[i] {
+                p1 = colors_val[i]
+            }
+        }
+        
+        for i in 0..<n {
+            let line = UIView()
+            let r : CGFloat = 255 - CGFloat(i)
+            let g : CGFloat = 255 - CGFloat(i)
+            let b : CGFloat = 255 - CGFloat(i)
+            let color = UIColor(displayP3Red: r / 255, green: g / 255, blue: b / 255, alpha: 1)
+            
+            line.backgroundColor = color
+            line.frame = CGRect(x: 0, y:CGFloat(i) * (2), width: 300, height: 2)
+            container.addSubview(line)
+            print("asd")
+        }
+        container.backgroundColor = .clear
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2
+        )
+        {
+            UIView.animate(withDuration: 2) {
+                self.container.center.x += 100
+                self.container.center.y += 200
+            }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                UIView.animate(withDuration: 2) {
+                    self.container.center.x -= 100
+                    self.container.center.y += 200
+                }
+            }
+            
+            
+        }
+       
+    }
+}
